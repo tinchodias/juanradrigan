@@ -8,6 +8,12 @@ var currentImage;
 function refreshCurrentImage() {
   currentImage = images[currentIndex];
   $("#content").attr("src", baseImageUrl + currentImage);
+
+
+  setTimeout(function() {
+    showNextImage();
+  }, 3 * 60 * 1000);
+
 }
 
 function forwardCurrentImage() {
@@ -31,10 +37,6 @@ $(function() {
   currentIndex = 0;
   refreshCurrentImage();
 
-/*  setTimeout(function() {
-    showNextImage();
-  }, 1000);
-*/
   $(window).keypress(function(event) {
     event.preventDefault();
     console.log(event.which);
