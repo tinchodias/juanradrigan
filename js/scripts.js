@@ -4,15 +4,24 @@ var baseImageUrl;
 var images;
 var currentIndex;
 var currentImage;
+var currentAutoplayTimeout;
+var autoPlayEnabled = true;
+var autoplayMinutes = 2;
+
 
 function refreshCurrentImage() {
   currentImage = images[currentIndex];
   $("#content").attr("src", baseImageUrl + currentImage);
 
 
-  setTimeout(function() {
-    showNextImage();
-  }, 3 * 60 * 1000);
+  if (currentAutoplayTimeout) {
+    clearTimeout(currentAutoplayTimeout);
+  }
+  if (autoPlayEnabled) {
+    currentAutoplayTimeout = setTimeout(function() {
+      showNextImage();
+    }, autoplayMinutes * 60 * 1000);
+  }
 
 }
 
@@ -35,7 +44,7 @@ $(function() {
   baseImageUrl = "img/";
   images = [ "homenaje_1a.svg", "homenaje_2c.svg" ];
   currentIndex = 0;
-  refreshCurrentImage();
+//  refreshCurrentImage();
 
   $(window).keypress(function(event) {
     event.preventDefault();
